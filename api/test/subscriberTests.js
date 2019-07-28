@@ -7,7 +7,7 @@ describe('Subsciber', () => {
     describe('adding', () => {
         it('should return proper answer', async () => {
             const config = {
-                apiUrl: 'http://localhost:9000/testAPI/post',
+                apiUrl: 'http://localhost:9000/addGuest/post',
                 headers: {
                     'Content-Type': 'application/json'
                 }

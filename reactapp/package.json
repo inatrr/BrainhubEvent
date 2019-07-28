@@ -1,8 +1,8 @@
 {
-  "name": "bhwc",
+  "name": "reactapp",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:9000/testAPI/",
+  "proxy": "http://localhost:9000/addGuest/",
   "dependencies": {
     "bootstrap": "^4.3.1",
     "mocha": "^6.2.0",
