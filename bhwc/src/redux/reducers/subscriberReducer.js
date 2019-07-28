@@ -12,6 +12,7 @@ const reducer = {
             message: action.payload
 
         }
+        
     }
 };
 

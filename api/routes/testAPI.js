@@ -13,16 +13,26 @@ mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost:27017/BrainhubEvent");
 
 var nameSchema = new mongoose.Schema({
-    firstname: String,
-    lastname: String,
-    email: String,
-    date: String
+    firstname: { type: String, required: [true, 'Name is null'] },
+    lastname: { type: String, required: [true, 'Surname is null'] },
+    email: {
+        type: String,
+        required: true,
+        validate: {
+            validator: function (v) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+            },
+            message: props => `${props.value} is not a valid email`
+        }
+    },
+    date: { type: String, required: [true, 'Date is null'] }
 });
+
 var User = mongoose.model("Subscribers", nameSchema);
 
 router.get('/', function (req, res, next) {
     res.send('API is working properly');
-    console.log('get')
+
 });
 
 router.post('/post', (req, res) => {
@@ -33,11 +43,11 @@ router.post('/post', (req, res) => {
 
     myData.save()
         .then(item => {
-            res.send('Guest saved to database');
+            res.send('Guest saved to event');
 
         })
         .catch(err => {
-            res.status(400).send("Unable to save to database");
+            res.status(400).send("Unable to save to event");
         });
 
 });

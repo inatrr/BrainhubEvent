@@ -1,11 +1,11 @@
 var assert = require('assert');
 const Subscriber = require('../models/subsciber/subsciber');
-
+const fetch = require('node-fetch');
 
 
 describe('Subsciber', () => {
     describe('adding', () => {
-        it('should return proper answer', () => {
+        it('should return proper answer', async () => {
             const config = {
                 apiUrl: 'http://localhost:9000/testAPI/post',
                 headers: {
@@ -15,21 +15,20 @@ describe('Subsciber', () => {
 
             let fakeSubscriber = new Subscriber(
                 {
-                    firstname: "John",
-                    lastname: "Newman",
-                    email: "john.newman@gmail.com",
+                    firstname: "Imie",
+                    lastname: "Nazwisko",
+                    email: "Imie.nazwisko@gmail.com",
                     date: "2019-09-09"
                 });
-                
 
-            const response = fetch(config.apiUrl, {
+            await fetch(config.apiUrl, {
                 method: 'POST',
                 headers: config.headers,
                 body: JSON.stringify(fakeSubscriber),
-            });
+            })
+                .then(promiseText => promiseText.text())
+                .then(data => assert.equal("Guest saved to event", data));
 
-            let message = response.text()
-            assert.equal("Guest saved to database", message);
         });
     });
 });

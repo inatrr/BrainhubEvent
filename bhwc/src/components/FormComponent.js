@@ -15,24 +15,28 @@ class FormHelp extends Component {
         }
     }
 
+
     handleChange = (event, fieldName) => {
         this.setState({ [fieldName]: event.target.value });
-        // console.log(this.state);
+        
+        this.setState({ message: '' })
+
     };
 
     handleSubmit = async e => {
         e.preventDefault();
         await this.props.addSubscriber(this.state);
 
-
-
         this.setState({
             firstname: '',
             lastname: '',
             email: '',
-            date: ''
+            date: '',
         })
+
+        this.setState({ message: this.props.message })
     };
+
 
 
     render() {
@@ -66,7 +70,7 @@ class FormHelp extends Component {
                 </Form.Group>
                 <Button variant="primary" type="submit"  >Submit</Button>
                 <div className='answerFromApi'>
-                    {this.props.message}
+                    {this.state.message}
                 </div>
             </Form>
         );
