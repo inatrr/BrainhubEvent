@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <h2>Sign up for to event</h2>
+          <h2>Sign up for the event</h2>
         </div>
         <div className='Event--form'>
           <Form />
